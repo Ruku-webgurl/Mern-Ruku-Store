@@ -137,7 +137,7 @@ const Shop = () => {
         {/* Page Banner / Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-50 border border-pink-200/80 text-pink-600 text-xs font-bold tracking-wider uppercase mb-3 shadow-xs">
-            <HiSparkles className="animate-spin-slow text-pink-500" size={14} />
+           
             <span>Curated Catalog</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">

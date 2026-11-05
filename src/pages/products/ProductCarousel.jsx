@@ -1,9 +1,9 @@
-import {useGetTopProductsQuery} from '../../redux/api/productApiSlice'
-import Message from '../../components/Message'
-import Slider from 'react-slick'
+import { useGetTopProductsQuery } from '../../redux/api/productApiSlice';
+import Message from '../../components/Message';
+import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import moment from "moment"
+import moment from "moment";
 import {
   FaBox,
   FaClock,
@@ -13,10 +13,10 @@ import {
 } from "react-icons/fa";
 
 const ProductCarousel = () => {
-    const {data: products, isLoading, error} = useGetTopProductsQuery()
+  const { data: products, isLoading, error } = useGetTopProductsQuery();
 
-    const settings = {
-    dots: false, 
+  const settings = {
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -24,17 +24,19 @@ const ProductCarousel = () => {
     arrows: true,
     autoplay: true,
     autoplaySpeed: 3000,
-    }
+  };
+
   return (
     <div className='mb-4 lg:block xl:block md:block'>
-        {isLoading ? null: error ? (
-            <Message variant='danger'>
-                {error?.data?.message || error?.message}
-
-            </Message>
-        ) : <Slider {...settings} className='xl:w-[50rem]  lg:w-[50rem] md:w-[56rem] sm:w-[40rem] sm:block'>
-            {
-            products.map(({image,
+      {isLoading ? null : error ? (
+        <Message variant='error'>
+          {error?.data?.message || error?.error || "Unable to load featured products"}
+        </Message>
+      ) : (
+        <Slider {...settings} className='xl:w-[50rem] lg:w-[50rem] md:w-[56rem] sm:w-[40rem] sm:block'>
+          {Array.isArray(products) &&
+            products.map(({
+              image,
               _id,
               name,
               price,
@@ -44,23 +46,24 @@ const ProductCarousel = () => {
               numReviews,
               rating,
               quantity,
-              countInStock,}) => (
-                <div key={_id}>
+              countInStock,
+            }) => (
+              <div key={_id}>
                 <img
                   src={image}
                   alt={name}
                   className="w-full rounded-lg object-cover h-[30rem]"
                 />
                 <div className="flex justify-between w-[20rem]">
-                    <div className="one">
+                  <div className="one">
                     <h2>{name}</h2>
                     <p> $ {price}</p> <br /> <br />
                     <p className="w-100">
-                      {description.substring(0, 170)} ...
+                      {description?.substring(0, 170)} ...
                     </p>
-                    </div>
+                  </div>
 
-                    <div className="flex justify-between w-[20rem]">
+                  <div className="flex justify-between w-[20rem]">
                     <div className="one">
                       <h1 className="flex items-center mb-6 w-32">
                         <FaStore className="mr-2 text-white" /> Brand: {brand}
@@ -89,17 +92,14 @@ const ProductCarousel = () => {
                         {countInStock}
                       </h1>
                     </div>
-                    </div>
-
+                  </div>
                 </div>
-
-                </div>
-              ))
-            }
-           </Slider>}
-
+              </div>
+            ))}
+        </Slider>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default ProductCarousel
+export default ProductCarousel;

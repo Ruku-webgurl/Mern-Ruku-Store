@@ -5,88 +5,86 @@ import { addToCart } from "../../redux/features/cart/cartSlice";
 import { toast } from "react-toastify";
 import HeartIcon from "./HeartIcon";
 
-const ProductCard = ({p}) => {
-     const dispatch = useDispatch();
+const ProductCard = ({ p }) => {
+  const dispatch = useDispatch();
 
-     const addToCartHandler = (product, qty) => {
+  const addToCartHandler = (product, qty = 1) => {
     dispatch(addToCart({ ...product, qty }));
-    toast.success("Item added successfully", {
-      position: toast.POSITION.TOP_RIGHT,
+    toast.success("Added to cart!", {
+      position: "top-right",
       autoClose: 2000,
     });
   };
- 
+
+  if (!p) return null;
+
+  const imageSrc = p.image ? p.image.replace(/\\/g, "/") : "/hero-podium-bg.jpg";
+
   return (
-  
-   <div className="max-w-sm relative bg-[#1A1A1A] rounded-lg shaodw dark:bg-gray-800 dark:border-gray-700">
-     <section className="relative">
-        <Link to={`/product/${p._id}`}>
-          <span className="absolute bottom-3 right-3 bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-pink-900 dark:text-pink-300">
-            {p?.brand}
+    <div className="w-full max-w-[280px] bg-white rounded-3xl p-4 border border-pink-100 shadow-sm shadow-pink-100/50 hover:shadow-xl hover:shadow-pink-200/50 hover:border-pink-200 transition-all duration-300 relative group flex flex-col justify-between">
+      {/* Product Image Frame */}
+      <div className="relative rounded-2xl bg-gradient-to-b from-pink-50/50 to-white p-3 overflow-hidden text-center">
+        {p.brand && (
+          <span className="absolute bottom-2 left-2 z-10 bg-pink-50 text-pink-700 border border-pink-200/80 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-xs">
+            {p.brand}
           </span>
+        )}
+
+        <Link to={`/product/${p._id}`}>
           <img
-            className="cursor-pointer w-full"
-            src={p.image}
+            src={imageSrc}
             alt={p.name}
-            style={{ height: "170px", objectFit: "cover" }}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80";
+            }}
+            className="w-full h-48 object-contain mx-auto transition-transform duration-300 group-hover:scale-105"
           />
         </Link>
+
         <HeartIcon product={p} />
-      </section>
-
-      <div className="p-5">
-         <div className="flex justify-between">
-          <h5 className="mb-2 text-xl text-whiet dark:text-white">{p?.name}</h5>
-
-          <p className="text-black font-semibold text-pink-500">
-            {p?.price?.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
-          </p>
-        </div>
- <p className="mb-3 font-normal text-[#CFCFCF]">
-          {p?.description?.substring(0, 60)} ...
-        </p>
-
-        <section className="flex justify-between items-center">
-          <Link
-            to={`/product/${p._id}`}
-            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-pink-700 rounded-lg hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 dark:bg-pink-600 dark:hover:bg-pink-700 dark:focus:ring-pink-800"
-          >
-            Read More
-            <svg
-              className="w-3.5 h-3.5 ml-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </Link>
-
-          <button
-            className="p-2 rounded-full"
-            onClick={() => addToCartHandler(p, 1)}
-          >
-            <AiOutlineShoppingCart size={25} />
-          </button>
-        </section>
-
       </div>
 
+      {/* Details & Actions */}
+      <div className="pt-4 flex flex-col flex-1 justify-between">
+        <div>
+          <Link to={`/product/${p._id}`}>
+            <h3 className="text-base font-bold text-gray-900 group-hover:text-pink-600 transition-colors line-clamp-1">
+              {p.name}
+            </h3>
+          </Link>
 
-   </div>
-   
-   
-  )
-}
+          <p className="text-xs text-gray-500 line-clamp-2 mt-1 leading-relaxed">
+            {p.description || "Discover premium quality and exceptional everyday value."}
+          </p>
+        </div>
 
-export default ProductCard
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-pink-50">
+          <span className="text-xl font-black text-pink-600">
+            ${p.price}
+          </span>
+
+          <div className="flex items-center gap-1.5">
+            <Link
+              to={`/product/${p._id}`}
+              className="px-3 py-1.5 rounded-full bg-pink-50 hover:bg-pink-100 text-pink-700 text-xs font-bold transition-all"
+            >
+              Details
+            </Link>
+
+            <button
+              onClick={() => addToCartHandler(p, 1)}
+              className="p-2 rounded-full bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white shadow-xs shadow-pink-200 hover:shadow-md transition-all cursor-pointer transform active:scale-95"
+              title="Add to cart"
+              aria-label="Add to cart"
+            >
+              <AiOutlineShoppingCart size={17} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProductCard;

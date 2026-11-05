@@ -1,36 +1,28 @@
-#navigation-container {
-  width: 4%;
-  transition: width 0.3s ease-in-out;
-  overflow: hidden; /* Hide overflowing content during transition */
+/* Navigation Custom Animation and Transitions */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-#navigation-container:hover {
-  width: 15%;
+.animate-slide-down {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Initially hide nav-item-name */
-.nav-item-name {
-  display: none;
-  transition: opacity 0.2s ease-in-out; /* Add opacity transition */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(236, 72, 153, 0);
+  }
 }
 
-#navigation-container:hover .nav-item-name {
-  display: block;
-  opacity: 1;
-}
-
-.search-input {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out; /* Add opacity transition */
-}
-
-#navigation-container:hover .search-input {
-  display: block;
-  opacity: 1;
-}
-
-#navigation-container:hover .search-icon {
-  display: none;
-  transition: opacity 0.2s ease-in-out; /* Add opacity transition */
+.animate-pulse-glow {
+  animation: pulseGlow 2s infinite ease-in-out;
 }

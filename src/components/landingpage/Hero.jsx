@@ -82,7 +82,7 @@ const Hero = () => {
       {/* Set z-0 so it renders on top of the section base and is 100% visible */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src="/bg.jpg"
+          src="/giftstore.jpg"
           alt="Ruku Store Bows and Cherries Hero Background"
           className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out"
         />

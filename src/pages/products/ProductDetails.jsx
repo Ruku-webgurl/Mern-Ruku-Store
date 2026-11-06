@@ -21,6 +21,7 @@ import HeartIcon from "./HeartIcon";
 import Ratings from "./Ratings";
 import ProductTabs from "./ProductTabs";
 import { addToCart } from "../../redux/features/cart/cartSlice";
+import { getFullImageUrl } from "../../utils/imageUrl";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
@@ -69,9 +70,7 @@ const ProductDetails = () => {
     navigate("/cart");
   };
 
-  const imageSrc = product?.image
-    ? product.image.replace(/\\/g, "/")
-    : "/hero-podium-bg.jpg";
+  const imageSrc = getFullImageUrl(product?.image);
 
   return (
     <div className="min-h-screen bg-[#fffafb] py-8 px-4 sm:px-6 lg:px-8">

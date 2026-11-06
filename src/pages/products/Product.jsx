@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
 import HeartIcon from "./HeartIcon";
+import { getFullImageUrl } from "../../utils/imageUrl";
 
 const Product = ({ product }) => {
+  const imageSrc = getFullImageUrl(product?.image);
+
   return (
     <div className="w-72 sm:w-80 bg-white rounded-3xl p-4 border border-pink-100 shadow-md shadow-pink-100/40 hover:shadow-xl hover:shadow-pink-200/50 transition-all duration-300 relative group flex flex-col justify-between">
       <div className="relative rounded-2xl bg-gradient-to-b from-pink-50/50 to-white p-3 overflow-hidden text-center">
         <img
-          src={product.image}
+          src={imageSrc}
           alt={product.name}
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src =
+              "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80";
+          }}
           className="w-full h-52 object-contain mx-auto transition-transform duration-300 group-hover:scale-105"
         />
         <HeartIcon product={product} />

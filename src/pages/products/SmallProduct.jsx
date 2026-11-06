@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import HeartIcon from "./HeartIcon";
+import { getFullImageUrl } from "../../utils/imageUrl";
 
 const SmallProduct = ({ product }) => {
-  const imageSrc = product?.image
-    ? product.image.replace(/\\/g, "/")
-    : "/hero-podium-bg.jpg";
+  const imageSrc = getFullImageUrl(product?.image);
 
   return (
     <div className="bg-white rounded-2xl p-3 border border-pink-100 shadow-xs hover:shadow-md transition-all">

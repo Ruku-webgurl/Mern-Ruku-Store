@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 import { toast } from "react-toastify";
 import HeartIcon from "./HeartIcon";
+import { getFullImageUrl } from "../../utils/imageUrl";
 
 const ProductCard = ({ p }) => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const ProductCard = ({ p }) => {
 
   if (!p) return null;
 
-  const imageSrc = p.image ? p.image.replace(/\\/g, "/") : "/hero-podium-bg.jpg";
+  const imageSrc = getFullImageUrl(p.image);
 
   return (
     <div className="w-full max-w-[280px] bg-white rounded-3xl p-4 border border-pink-100 shadow-sm shadow-pink-100/50 hover:shadow-xl hover:shadow-pink-200/50 hover:border-pink-200 transition-all duration-300 relative group flex flex-col justify-between">
@@ -36,7 +37,8 @@ const ProductCard = ({ p }) => {
             alt={p.name}
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80";
+              e.currentTarget.src =
+                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80";
             }}
             className="w-full h-48 object-contain mx-auto transition-transform duration-300 group-hover:scale-105"
           />

@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaTrash, FaArrowLeft, FaShoppingBag } from "react-icons/fa";
 import { addToCart, removeFromCart } from "../redux/features/cart/cartSlice";
+import { getFullImageUrl } from "../utils/imageUrl";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -75,9 +76,7 @@ const Cart = () => {
               {/* Cart Items List */}
               <div className="lg:col-span-2 space-y-4">
                 {cartItems.map((item) => {
-                  const imageSrc = item.image
-                    ? item.image.replace(/\\/g, "/")
-                    : "/hero-podium-bg.jpg";
+                  const imageSrc = getFullImageUrl(item.image);
                   return (
                     <div
                       key={item._id}

@@ -21,6 +21,7 @@ import {
 } from "react-icons/fi";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { HiSparkles } from "react-icons/hi2";
+import { getFullImageUrl } from "../../utils/imageUrl";
 
 const Hero = () => {
   // Top products from RTK Query
@@ -237,8 +238,13 @@ const Hero = () => {
                 className="w-full h-48 sm:h-56 flex items-center justify-center p-3 rounded-2xl bg-gradient-to-b from-pink-50/40 to-white overflow-hidden group"
               >
                 <img
-                  src={activeProduct.image}
+                  src={getFullImageUrl(activeProduct.image)}
                   alt={activeProduct.name}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =
+                      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80";
+                  }}
                   className="w-full h-full object-contain mx-auto transition-transform duration-300 group-hover:scale-105"
                 />
               </Link>

@@ -1,7 +1,7 @@
 {
-  "name": "ruku-store",
+  "name": "ruku-store-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend API for Ruku Store",
   "main": "index.js",
   "type": "module",
   "scripts": {

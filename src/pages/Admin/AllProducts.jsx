@@ -13,6 +13,7 @@ import {
   FiTag,
   FiCalendar,
 } from "react-icons/fi";
+import { getFullImageUrl } from "../../utils/imageUrl";
 
 const AllProducts = () => {
   const { data: products = [], isLoading, isError, error } =
@@ -112,9 +113,7 @@ const AllProducts = () => {
           /* Products Grid */
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product) => {
-              const imageSrc = product.image
-                ? product.image.replace(/\\/g, "/")
-                : "/hero-podium-bg.jpg";
+              const imageSrc = getFullImageUrl(product.image);
 
               return (
                 <div

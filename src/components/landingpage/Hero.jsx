@@ -78,16 +78,16 @@ const Hero = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* ================= HERO BACKGROUND: 3D PINK PODIUM & BALLOONS ================= */}
+      {/* ================= HERO BACKGROUND: CUTE BOWS & CHERRIES PATTERN ================= */}
       {/* Set z-0 so it renders on top of the section base and is 100% visible */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src="/hero-podium-bg.jpg"
-          alt="Ruku Store Pink Podium Background"
-          className="w-full h-full object-cover object-bottom sm:object-center transition-transform duration-1000 ease-out"
+          src="/bg.jpg"
+          alt="Ruku Store Bows and Cherries Hero Background"
+          className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out"
         />
-        {/* Soft left-gradient wash overlay: keeps text readable while letting the full 3D podium stage & colorful balloons shine through */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/70 via-white/30 to-transparent pointer-events-none" />
+        {/* Soft elegant gradient wash overlay: keeps text readable while letting the cute bows and cherries pattern shine through */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/75 via-white/30 to-pink-50/20 pointer-events-none" />
       </div>
 
       {/* Floating Left Arrow */}
@@ -120,7 +120,6 @@ const Hero = () => {
           
           {/* Eyebrow / Pill Badge */}
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-pink-50 border border-pink-200 text-pink-700 text-xs font-bold mb-3 shadow-xs">
-            <HiSparkles className="text-pink-500" size={13} />
             <span>WELCOME TO RUKU STORE</span>
           </div>
 
